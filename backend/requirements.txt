@@ -1,0 +1,27 @@
+# --- Web / API ---
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+python-multipart==0.0.20
+pydantic==2.11.4
+pydantic-settings==2.9.1
+python-dotenv==1.1.0
+
+# --- Database ---
+SQLAlchemy==2.0.41
+psycopg[binary]==3.2.9
+alembic==1.15.2
+
+# --- Media import ---
+yt-dlp>=2025.5.22
+
+# --- AI (local inference, CPU by default) ---
+# torch / torchaudio are installed from the PyTorch CPU index, see README:
+#   pip install torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+torch==2.5.1
+torchaudio==2.5.1
+demucs==4.0.1
+soundfile==0.13.1
+faster-whisper==1.1.1
+# faster-whisper 1.1.1 imports requests and targets the 0.x huggingface-hub API
+requests>=2.32
+huggingface-hub>=0.23,<1.0
