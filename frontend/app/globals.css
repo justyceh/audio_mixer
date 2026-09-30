@@ -1,26 +1,182 @@
 @import "tailwindcss";
 
+/*
+  Cel-shaded studio: flat fills, one ink outline weight, hard offset shadows.
+  Track-type colours carry meaning everywhere (dialogue / music / sfx / other).
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --paper: #eceef6;
+  --surface: #ffffff;
+  --sunken: #e1e4ef;
+  --ink: #1a1830;
+  --muted: #605e7a;
+  --line: #1a1830;
+  --shadow: #1a1830;
+  --dialogue: #ff4f7b;
+  --music: #2f6bff;
+  --sfx: #f5a524;
+  --other: #8f8cad;
+  --ok: #138a63;
+  --danger: #d8343a;
+  --on-accent: #ffffff;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --paper: #12111f;
+    --surface: #1d1b31;
+    --sunken: #16152a;
+    --ink: #f0effa;
+    --muted: #a4a2c3;
+    --line: #4b4775;
+    --shadow: #040310;
+    --dialogue: #ff6b91;
+    --music: #5b8cff;
+    --sfx: #ffb53d;
+    --other: #7d7a9e;
+    --ok: #3ccf9a;
+    --danger: #ff5c61;
+    color-scheme: dark;
   }
 }
 
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-dialogue: var(--dialogue);
+  --color-music: var(--music);
+  --color-sfx: var(--sfx);
+  --color-other: var(--other);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --font-display: var(--font-dela);
+  --font-sans: var(--font-zen);
+  --font-mono: var(--font-jetbrains);
+}
+
+html {
+  background: var(--paper);
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-zen), system-ui, sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid var(--music);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .panel {
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0 1rem;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.9rem;
+    box-shadow: 3px 3px 0 var(--shadow);
+    transition: transform 80ms ease, box-shadow 80ms ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .btn:hover:not(:disabled) {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--shadow);
+  }
+  .btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--shadow);
+  }
+  .btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--dialogue);
+    color: var(--on-accent);
+  }
+  .btn-blue {
+    background: var(--music);
+    color: var(--on-accent);
+  }
+  .btn-ghost {
+    box-shadow: none;
+    border-color: transparent;
+    background: transparent;
+  }
+  .btn-ghost:hover:not(:disabled) {
+    box-shadow: none;
+    transform: none;
+    background: var(--sunken);
+  }
+  .btn-sm {
+    min-height: 2rem;
+    padding: 0 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  .field {
+    width: 100%;
+    min-height: 2.5rem;
+    padding: 0 0.75rem;
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.1rem 0.55rem;
+    border: 1.5px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+}
+
+input[type="range"] {
+  accent-color: var(--dialogue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
